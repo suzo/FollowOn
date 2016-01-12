@@ -98,9 +98,6 @@ var getMatchFixtures = function(data) {
         temp.time = zeroFill(utcTime.getHours()) + ':' + zeroFill(utcTime.getMinutes()) + ' IST ' + zeroFill(utcTime.getUTCHours()) + ':' + zeroFill(utcTime.getUTCMinutes()) + ' GMT ';
         temp.m_date = days[utcTime.getDay()] + ', ' + zeroFill(utcTime.getDate()) + ' ' + months[utcTime.getMonth()];
         temp.description = data[i].description;
-        //temp.team1 = data[i].team1.team.abbreviation;
-        //temp.team2 = data[i].team2.team.abbreviation; 
-        // if (data[i].groupName == "Playoffs") {
         temp.pool = data[i].groupName;
             if (data[i].team1 != undefined) {
                 temp.team1 = data[i].team1.team.abbreviation;
@@ -133,7 +130,6 @@ var getMatchInfo = function(matches) {
                 var jsonString = data.substring(startPos + 1, endPos + 1);
                 json = JSON.parse(jsonString);
                 matchDetails.push(json);
-                //currentMatch = json;
                  currentMatch.push(json);
                 formatTheInfo(matchDetails);
             });
@@ -336,3 +332,43 @@ var refresh = setInterval(init, 5000);
 getPoints();
 
 var refreshPoints = setInterval(getPoints, 1000 * 60 * 60);
+
+
+var x = [
+      {"user_id": 35, "group": "A"},
+      {"user_id": 40, "group": "B"},
+      {"user_id": 39, "group": "B"},
+      {"user_id": 39, "group": "B"},
+      {"user_id": 39, "group": "B"},
+      {"user_id": 40, "group": "B"},
+      {"user_id": 39, "group": "B"},
+      {"user_id": 39, "group": "B"},
+      {"user_id": 40, "group": "C"},
+      {"user_id": 39, "group": "C"}
+    ]
+
+for (var  i = 0; i < x.length-1; i++) {
+    var count = 0;
+    for(var j = i+1; j < x.length - 2; j++){
+        if(x[i].user_id === x[j].user_id){
+            count++;
+            if(count > 2){
+                x.splice(j,1);
+                count--;
+            }
+        }   
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
